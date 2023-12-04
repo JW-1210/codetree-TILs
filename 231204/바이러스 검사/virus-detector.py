@@ -6,7 +6,7 @@ head, crew = map(int,input().split())
 cnt = n
 for i in range(n):
     client[i] -= head
-    while client[i] >= 0:
+    while client[i] > 0:
         client[i] -= crew
         cnt += 1
 
