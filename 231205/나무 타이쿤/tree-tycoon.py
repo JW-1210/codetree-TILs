@@ -21,25 +21,24 @@ init_visit[n-1][0], init_visit[n-2][0], init_visit[n-1][1], init_visit[n-2][1] =
 def move(d, p):
   d = d-1
   visit = [[0 for _ in range(n)] for _ in range(n)]
-
   for i in range(n):
     for j in range(n):
       # visit[i][j] = 0
       if init_visit[i][j] == 1:
         # print(i,j)
-        nx = j + (p*dx[d])
-        ny = i + (p*dy[d])
+        nx = (i + (p*dx[d])) %n
+        ny = (j + (p*dy[d])) %n
         # print(j + (p*dx[d]), i + (p*dy[d]))
-        if nx > n-1:
-          nx -= n
-        elif ny > n-1:
-          ny -= n
-        elif nx < 0:
-          nx += n
-        elif ny < 0:
-          ny += n    
+        # if nx > n-1:
+        #   nx -= n
+        # elif ny > n-1:
+        #   ny -= n
+        # elif nx < 0:
+        #   nx += n
+        # elif ny < 0:
+        #   ny += n    
           
-        visit[ny][nx] = 1
+        visit[nx][ny] = 1
   return visit
   # print(visit)
 
@@ -76,7 +75,7 @@ def cut_tree():
       if arr[i][j] >=2 and visit[i][j] == 0:
         arr[i][j] -= 2
         visit[i][j] = 1
-      else:
+      elif visit[i][j] == 1:
         visit[i][j] = 0
   global init_visit
   init_visit = visit
